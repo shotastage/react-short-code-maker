@@ -1,0 +1,18 @@
+{
+  "name": "react-short-code-maker",
+  "version": "0.0.1",
+  "description": "WordPress short-code like widget maker for React.js",
+  "main": "index.js",
+  "repository": "git@github.com:shotastage/react-short-code-maker.git",
+  "author": "Shota Shimazu <hornet.live.mf@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.8.4",
+    "@babel/preset-env": "^7.8.4",
+    "@babel/preset-react": "^7.8.3",
+    "babel-loader": "^8.0.6",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
+  }
+}
