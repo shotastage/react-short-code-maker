@@ -17,12 +17,12 @@ You can write short-code like this.
 ```jsx
 return (
   <p>
-		Here is an movie for explaining how to install Ubuntu into MacBook.
+    Here is an movie for explaining how to install Ubuntu into MacBook.
     
     [youtube id="kRgKlcm1XPI"]
     
     Following, this movie....
-	</p>
+  </p>
 );
 ```
 
@@ -33,12 +33,12 @@ This code will render shown below.
 ```jsx
 return (
   <p>
-		Here is an movie for explaining how to install Ubuntu into MacBook.
+    Here is an movie for explaining how to install Ubuntu into MacBook.
     
     <iframe width="100%" height="470" src="https://www.youtube.com/embed/kRgKlcm1XPI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
     Following, this movie....
-	</p>
+  </p>
 );
 ```
 
