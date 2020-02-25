@@ -1,8 +1,6 @@
-
 import React, { Children } from "react";
 import styled from 'styled-components';
 import { AudioPlay } from '../components/AudioPlay';
-
 
 
 const WidgetContainer = styled.div`
@@ -23,6 +21,7 @@ const WarningView = styled.div`
   min-height: 80px;
   margin-bottom: 10px;
   overflow: scroll;
+
   * {
     margin-top: 0;
     margin-bottom: 0;
@@ -97,7 +96,6 @@ export class ContextProcessor extends React.Component {
   apple(code) {
     try {
       let playbackURL = "https://embed.music.apple.com/jp/album/" + code.match(/url\=\".*?(?: .+?)?\"/g)[0].replace( /url\=\"/g , "").replace("\"", "").split("album/")[1];
-
       return (
         <WidgetContainer>
           <iframe
@@ -155,3 +153,4 @@ export class ContextProcessor extends React.Component {
     )
   }
 }
+
