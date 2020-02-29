@@ -1,10 +1,11 @@
-import React, { Children } from "react";
-
-
-export class ShortCodeMaker    {
+class ShortCodeMaker    {
 
     constructor(attrs) {
         super(attrs)
+    }
+
+    addElmName() {
+
     }
 
     addAttribute() {
@@ -12,9 +13,12 @@ export class ShortCodeMaker    {
     }
     
     
-    render() {
+    createHTML() {
         return (
             <></>
         )
     }
 }
+
+
+export default ShortCodeMaker;
