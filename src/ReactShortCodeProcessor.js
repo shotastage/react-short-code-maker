@@ -1,7 +1,6 @@
 import React, { Children } from "react";
-import styled from 'styled-components';
-import { AudioPlay } from '../components/AudioPlay';
-
+import styled from "styled-components";
+import { AudioPlay } from "../components/AudioPlay";
 
 const WidgetContainer = styled.div`
   width: 100%;
@@ -9,8 +8,6 @@ const WidgetContainer = styled.div`
   align-items: center;
   justify-content: center;
 `;
-
-
 
 const WarningView = styled.div`
   width: 100%;
@@ -28,8 +25,6 @@ const WarningView = styled.div`
   }
 `;
 
-
-
 export class ContextProcessor extends React.Component {
   constructor(props) {
     super(props);
@@ -37,41 +32,45 @@ export class ContextProcessor extends React.Component {
 
   abstraction() {
     let convertContent = "";
-    
-    Children.map(this.props.children, (child) => {
+
+    Children.map(this.props.children, child => {
       switch (typeof child) {
-        case 'string':
-          convertContent += child
+        case "string":
+          convertContent += child;
         default:
-          return
+          return;
       }
     });
-    
-    let tmp = []
-    convertContent.split(/(\[.*?(?: .+?)?\])/g).forEach((elm) => {
+
+    let tmp = [];
+    convertContent.split(/(\[.*?(?: .+?)?\])/g).forEach(elm => {
       switch (true) {
         case elm.match(/\[youtube.*?(?: .+?)?\]/) != null:
-          tmp.push(this.youtube(elm))
+          tmp.push(this.youtube(elm));
           break;
         case elm.match(/\[apple.*?(?: .+?)?\]/) != null:
-          tmp.push(this.apple(elm))
+          tmp.push(this.apple(elm));
           break;
         case elm.match(/\[sound.*?(?: .+?)?\]/) != null:
-          tmp.push(this.sound(elm))
+          tmp.push(this.sound(elm));
           break;
         default:
-          tmp.push(elm)
+          tmp.push(elm);
           break;
       }
-    });  
+    });
 
     return tmp;
   }
 
   youtube(code) {
-
     try {
-      let playbackURL = "https://www.youtube.com/embed/" + code.match(/id\=\".*?(?: .+?)?\"/g)[0].replace( /id\=\"/g , "").replace("\"", "")
+      let playbackURL =
+        "https://www.youtube.com/embed/" +
+        code
+          .match(/id\=\".*?(?: .+?)?\"/g)[0]
+          .replace(/id\=\"/g, "")
+          .replace('"', "");
 
       return (
         <iframe
@@ -79,28 +78,36 @@ export class ContextProcessor extends React.Component {
           height="470"
           src={playbackURL}
           frameBorder="0"
-          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen/>
+          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        />
       );
-    }
-    catch(e) {
+    } catch (e) {
       return (
         <WarningView>
           <h5>埋め込まれたショートコードに構文エラーがあります.</h5>
           <label>使用されたショート構文:</label>
           <p>{code}</p>
         </WarningView>
-      )
+      );
     }
   }
 
   apple(code) {
     try {
-      let playbackURL = "https://embed.music.apple.com/jp/album/" + code.match(/url\=\".*?(?: .+?)?\"/g)[0].replace( /url\=\"/g , "").replace("\"", "").split("album/")[1];
+      let playbackURL =
+        "https://embed.music.apple.com/jp/album/" +
+        code
+          .match(/url\=\".*?(?: .+?)?\"/g)[0]
+          .replace(/url\=\"/g, "")
+          .replace('"', "")
+          .split("album/")[1];
       return (
         <WidgetContainer>
           <iframe
             allow="autoplay *; encrypted-media *;"
-            frameborder="0" height="150"
+            frameborder="0"
+            height="150"
             style={{
               width: "100%",
               maxWidth: "660px",
@@ -108,18 +115,18 @@ export class ContextProcessor extends React.Component {
               background: "transparent"
             }}
             sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
-            src={playbackURL} />
+            src={playbackURL}
+          />
         </WidgetContainer>
-      )
-    }
-    catch(e) {
+      );
+    } catch (e) {
       return (
         <WarningView>
           <h5>埋め込まれたショートコードに構文エラーがあります.</h5>
           <label>使用されたショート構文:</label>
           <p>{code}</p>
         </WarningView>
-      )
+      );
     }
   }
 
@@ -127,30 +134,27 @@ export class ContextProcessor extends React.Component {
     // let playbackURL = code.match(/url\=\".*?(?: .+?)?\"/g)[0].replace( /url\=\"/g , "").replace("\"", "")
 
     try {
-      return (
-        <AudioPlay/>
-      )
-    }
-    catch(e) {
+      return <AudioPlay />;
+    } catch (e) {
       return (
         <WarningView>
           <h5>埋め込まれたショートコードに構文エラーがあります.</h5>
           <label>使用されたショート構文:</label>
           <p>{code}</p>
         </WarningView>
-      )
+      );
     }
   }
 
   render() {
-
-    const elms = this.abstraction()
+    const elms = this.abstraction();
 
     return (
       <>
-        { elms.map((value) => (<>{value}</>))}
+        {elms.map(value => (
+          <>{value}</>
+        ))}
       </>
-    )
+    );
   }
 }
-

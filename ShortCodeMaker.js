@@ -1,10 +1,17 @@
 import React, { Children } from "react";
 
 
-export class ShortCodeMaker extends  React.Component {
+export class ShortCodeMaker    {
 
-    code = "code_identifier"
+    constructor(attrs) {
+        super(attrs)
+    }
 
+    addAttribute() {
+
+    }
+    
+    
     render() {
         return (
             <></>
